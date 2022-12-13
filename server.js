@@ -5,11 +5,11 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-app.use('./routes/api');
-app.use('./routes/html');
+app.use('routes/api/index.js');
+app.use('routes/html/index.js');
 
 
 app.listen(PORT, () => {

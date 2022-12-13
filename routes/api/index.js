@@ -3,7 +3,7 @@ const ERouter = require('express').Router();
 const fs = require('fs');
 const uniqid = require('uniqid');
 
-ERouter.get('/api/notes', (req, res) => {
+ERouter.get('/notes', (req, res) => {
     fs.readFile('./db/db.json', (err, data) => {
         if (err) throw err;
         console.log(JSON.parse(data));
@@ -11,8 +11,8 @@ ERouter.get('/api/notes', (req, res) => {
     })
 })
 
-ERouter.post('/api/notes', (req, res) => {
-    let AddedNote = {
+ERouter.post('/notes', (req, res) => {
+    let addedNote = {
         id: uniqid(),
         title: req.body.title,
         text: req.body.text
@@ -23,7 +23,7 @@ ERouter.post('/api/notes', (req, res) => {
 
         let addedData = JSON.parse(data);
 
-        addedData.push(addedData);
+        addedData.push(addedNote);
         console.log(addedData)
 
         fs.writeFile('./db/db.json', JSON.stringify(addedData), (err) => {
@@ -34,3 +34,4 @@ ERouter.post('/api/notes', (req, res) => {
     })
 });
 
+module.exports = ERouter;
