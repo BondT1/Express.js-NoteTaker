@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { create } = require('../../lib/createNotes');
+const { createNote, deleteNote } = require('../../lib/createNotes');
 let { array } = require('../../db/db.json');
 
-router.get('/notes', (req, res) => {
+router.get('/api/notes', (req, res) => {
     let content = array;
     res.json(content);
 });
 
-router.post('/notes', (req, res) => {
+router.post('/api/notes', (req, res) => {
     if(array) {
         req.body.id = array.length.toString();
     } else {
@@ -15,3 +15,4 @@ router.post('/notes', (req, res) => {
     res.json(create(req.body, array));
 });
 
+// create deleteNote function
